@@ -1,4 +1,4 @@
-# TP – Gestion des Notes Internes (Dark Theme)
+# Projet - Gestion des Notes Internes
 Ce module Odoo offre une solution complète pour la création, l'organisation et le suivi de notes internes, avec une interface utilisateur améliorée incluant un mode sombre.
 ## 📋 Fonctionnalités Principales
 ### 📝 Gestion Avancée des Notes
