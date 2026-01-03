@@ -1,0 +1,741 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{tikz}
+\usepackage{eso-pic}
+\usepackage{afterpage}
+
+% Configuration de la page
+\geometry{margin=2.5cm}
+
+% Cadre autour du contenu de toutes les pages
+\AddToShipoutPictureBG{%
+\begin{tikzpicture}[remember picture,overlay]
+  \draw[line width=2pt,color=black!70] 
+    ([xshift=1cm,yshift=-1cm]current page.north west) -- 
+    ([xshift=-1cm,yshift=-1cm]current page.north east) -- 
+    ([xshift=-1cm,yshift=1cm]current page.south east) -- 
+    ([xshift=1cm,yshift=1cm]current page.south west) -- 
+    cycle;
+\end{tikzpicture}%
+}
+
+% Style par défaut
+\fancypagestyle{fancy}{%
+  \fancyhf{}
+  \fancyhead[L]{\leftmark}
+  \fancyhead[R]{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% Style pour la première page (sans numéro de page en bas)
+\fancypagestyle{firstpage}{%
+  \fancyhf{}
+  \fancyhead[L]{\leftmark}
+  \fancyhead[R]{}
+  \fancyfoot[C]{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+% Style pour les autres pages
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyhead[L]{\leftmark}
+  \fancyhead[R]{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\pagestyle{fancy}
+
+% Configuration des couleurs pour le code
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    language=Python
+}
+
+\lstset{style=mystyle}
+
+% Configuration des titres
+\titleformat{\section}
+{\Large\bfseries\color{blue!70!black}}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\large\bfseries\color{blue!50!black}}
+{\thesubsection}{1em}{}
+
+% Informations du document
+\title{
+    \vspace{-2cm}
+    \textbf{\Huge Module Odoo}\\
+    \vspace{0.5cm}
+    \Large TP – Gestion des Notes Internes\\
+    \Large (Dark Theme)
+    \vspace{1cm}
+}
+\author{
+    \textbf{Auteur:} Votre Nom\\
+    \textbf{Date:} \today\\
+    \textbf{Version:} 3.2
+}
+\date{}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{firstpage}
+
+\newpage
+\pagestyle{fancy}
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\subsection{Contexte du Projet}
+
+Ce projet consiste en le développement d'un module Odoo complet pour la gestion des notes internes au sein d'une organisation. Le module a été conçu avec une attention particulière portée à l'expérience utilisateur, notamment avec l'implémentation d'un système de thème sombre/clair et d'une interface moderne et intuitive.
+
+\subsection{Objectifs du Projet}
+
+Les objectifs principaux de ce projet sont :
+
+\begin{itemize}
+    \item Créer un système de gestion de notes interne complet et fonctionnel
+    \item Implémenter un système de thème sombre/clair avec basculement dynamique
+    \item Développer une interface utilisateur moderne et responsive
+    \item Fournir des fonctionnalités avancées de gestion (priorités, favoris, échéances)
+    \item Assurer une bonne expérience utilisateur avec des notifications et des retours visuels
+\end{itemize}
+
+\subsection{Technologies Utilisées}
+
+\begin{itemize}
+    \item \textbf{Framework:} Odoo 15+
+    \item \textbf{Langage de programmation:} Python 3
+    \item \textbf{Base de données:} PostgreSQL
+    \item \textbf{Interface:} XML (vues), CSS3, JavaScript
+    \item \textbf{Architecture:} MVC (Model-View-Controller)
+\end{itemize}
+
+\section{Architecture du Module}
+
+\subsection{Structure du Projet}
+
+Le module suit la structure standard d'un module Odoo :
+
+\begin{lstlisting}[language=bash]
+tp_gestion_notes/
+├── __init__.py
+├── __manifest__.py
+├── models/
+│   ├── __init__.py
+│   ├── note_interne.py
+│   └── user_preferences.py
+├── views/
+│   ├── note_views.xml
+│   ├── date_filter_wizard.xml
+│   └── wizard_view.xml
+├── wizards/
+│   ├── __init__.py
+│   ├── theme_config_wizard.py
+│   └── date_filter_wizard.py
+├── security/
+│   └── ir.model.access.csv
+├── static/
+│   └── src/
+│       ├── css/
+│       │   ├── dark_theme.css
+│       │   └── components.css
+│       └── js/
+│           ├── dark_theme.js
+│           └── theme_config.js
+└── migrations/
+    └── 3.2.0/
+        └── post-migration.py
+\end{lstlisting}
+
+\subsection{Modèle de Données}
+
+\subsubsection{Modèle Principal : tp.note.interne}
+
+Le modèle principal \texttt{tp.note.interne} hérite de \texttt{mail.thread} et \texttt{mail.activity.mixin} pour bénéficier des fonctionnalités de messagerie et d'activités d'Odoo.
+
+\textbf{Champs principaux :}
+
+\begin{itemize}
+    \item \texttt{titre} : Titre de la note (requis, indexé)
+    \item \texttt{contenu} : Contenu HTML de la note
+    \item \texttt{description} : Description courte de la note
+    \item \texttt{auteur\_id} : Auteur de la note (Many2one vers res.users)
+    \item \texttt{date\_note} : Date de création de la note
+    \item \texttt{date\_echeance} : Date d'échéance (nouveau)
+    \item \texttt{statut} : Statut de la note (brouillon, publié, archivé)
+    \item \texttt{priority} : Priorité (Basse, Normale, Haute, Urgente) (nouveau)
+    \item \texttt{is\_favorite} : Indicateur de favori (nouveau)
+    \item \texttt{is\_overdue} : Calculé automatiquement si la note est en retard
+    \item \texttt{theme\_couleur} : Couleur du thème
+    \item \texttt{is\_dark\_mode} : Mode sombre activé
+\end{itemize}
+
+\subsubsection{Méthodes Principales}
+
+\begin{lstlisting}[language=Python]
+def action_publier(self):
+    """Publie la note avec notification améliorée"""
+    
+def action_archiver(self):
+    """Archive la note avec notification"""
+    
+def action_restaurer(self):
+    """Restaure une note archivée"""
+    
+def action_toggle_favorite(self):
+    """Toggle le statut favori d'une note"""
+    
+def get_statistics(self):
+    """Retourne les statistiques des notes pour le dashboard"""
+\end{lstlisting}
+
+\section{Fonctionnalités Principales}
+
+\subsection{Gestion des Notes}
+
+\subsubsection{Création et Édition}
+
+Le module permet de créer et éditer des notes avec :
+\begin{itemize}
+    \item Un éditeur HTML riche pour le contenu
+    \item Un système de titre et description
+    \item Attribution automatique de l'auteur
+    \item Gestion de la date de création
+\end{itemize}
+
+\subsubsection{Statuts des Notes}
+
+Le système de statuts permet de gérer le cycle de vie des notes :
+
+\begin{enumerate}
+    \item \textbf{Brouillon} : Note en cours de rédaction
+    \item \textbf{Publié} : Note finalisée et visible
+    \item \textbf{Archivé} : Note archivée mais conservée
+\end{enumerate}
+
+\subsection{Système de Priorité}
+
+Un système de priorité à 4 niveaux a été implémenté :
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|l|}
+\hline
+\textbf{Niveau} & \textbf{Description} \\
+\hline
+0 & Basse \\
+1 & Normale (par défaut) \\
+2 & Haute (⚡) \\
+3 & Urgente (🔥) \\
+\hline
+\end{tabular}
+\caption{Système de priorité}
+\end{table}
+
+\subsection{Système de Favoris}
+
+Les utilisateurs peuvent marquer des notes comme favorites pour un accès rapide :
+\begin{itemize}
+    \item Bouton étoile dans toutes les vues
+    \item Filtre dédié "Favoris"
+    \item Indicateur visuel dans les cartes Kanban
+    \item Tri automatique des favoris en premier
+\end{itemize}
+
+\subsection{Gestion des Échéances}
+
+\begin{itemize}
+    \item Champ \texttt{date\_echeance} pour définir une date limite
+    \item Calcul automatique des notes en retard (\texttt{is\_overdue})
+    \item Filtre "En retard" dans la recherche
+    \item Indicateur visuel avec animation pour les notes en retard
+\end{itemize}
+
+\subsection{Filtrage et Recherche}
+
+Le module offre plusieurs options de filtrage :
+
+\begin{itemize}
+    \item \textbf{Mes Notes} : Notes de l'utilisateur connecté
+    \item \textbf{Favoris} : Notes marquées comme favorites
+    \item \textbf{Par statut} : Brouillons, Publiés, Archivés
+    \item \textbf{Urgentes} : Notes avec priorité urgente
+    \item \textbf{En retard} : Notes avec échéance dépassée
+    \item \textbf{Par date} : Filtrage par date spécifique via wizard
+\end{itemize}
+
+\subsection{Wizard de Filtrage par Date}
+
+Un wizard dédié permet de filtrer les notes par date :
+\begin{itemize}
+    \item Sélection de date via un calendrier
+    \item Affichage de toutes les notes de la date sélectionnée
+    \item Vue filtrée avec titre dynamique
+\end{itemize}
+
+\section{Interface Utilisateur}
+
+\subsection{Vues Disponibles}
+
+\subsubsection{Vue Liste (Tree View)}
+
+La vue liste offre :
+\begin{itemize}
+    \item Édition inline des notes
+    \item Colonnes : Favori, Priorité, Titre, Auteur, Date, Échéance, Statut
+    \item Actions rapides : Publier, Archiver, Restaurer, Supprimer
+    \item Décoration visuelle selon le statut
+    \item Tri par défaut : Date décroissante
+\end{itemize}
+
+\subsubsection{Vue Formulaire (Form View)}
+
+La vue formulaire comprend :
+\begin{itemize}
+    \item En-tête avec actions principales
+    \item Barre de statut interactive
+    \item Section titre avec style amélioré
+    \item Zone de description
+    \item Métadonnées (Priorité, Auteur, Dates)
+    \item Notebook avec onglets :
+    \begin{itemize}
+        \item Contenu : Éditeur HTML
+        \item Informations : Suivi et historique
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Vue Kanban}
+
+La vue Kanban offre :
+\begin{itemize}
+    \item Cartes stylisées avec gradients
+    \item Groupement par statut par défaut
+    \item Indicateurs visuels :
+    \begin{itemize}
+        \item Étoile pour les favoris
+        \item Icône feu pour les urgentes
+        \item Bordure colorée pour les priorités
+    \end{itemize}
+    \item Métadonnées : Auteur avec avatar, Date relative
+    \item Description tronquée automatiquement
+\end{itemize}
+
+\subsection{Système de Thème}
+
+\subsubsection{Thème Sombre}
+
+Un thème sombre complet a été implémenté avec :
+\begin{itemize}
+    \item Variables CSS pour la cohérence des couleurs
+    \item Palette de couleurs optimisée :
+    \begin{itemize}
+        \item Primaire : \#1a1d21
+        \item Secondaire : \#2d3136
+        \item Tertiaire : \#3d4249
+        \item Accent : \#4a90e2
+    \end{itemize}
+    \item Adaptation de tous les composants Odoo
+    \item Scrollbar personnalisée
+\end{itemize}
+
+\subsubsection{Bouton de Basculement}
+
+Un bouton flottant permet de basculer entre les thèmes :
+\begin{itemize}
+    \item Position : Bas droite de l'écran
+    \item Icône dynamique : Lune (mode clair) / Soleil (mode sombre)
+    \item Animation au survol
+    \item Persistance dans localStorage
+\end{itemize}
+
+\subsection{Améliorations Visuelles}
+
+\subsubsection{Design Moderne}
+
+\begin{itemize}
+    \item \textbf{Cards} : Bordures arrondies, ombres portées, effets de survol
+    \item \textbf{Boutons} : Gradients, animations, icônes
+    \item \textbf{Typographie} : Hiérarchie claire, espacements optimisés
+    \item \textbf{Couleurs} : Palette cohérente avec indicateurs visuels
+\end{itemize}
+
+\subsubsection{Animations et Transitions}
+
+\begin{itemize}
+    \item Transitions fluides (0.3s ease)
+    \item Effets de survol sur les cartes
+    \item Animation pulse pour les notes en retard
+    \item Transformations au survol des boutons
+\end{itemize}
+
+\subsubsection{État Vide Amélioré}
+
+L'état vide (quand il n'y a pas de notes) affiche :
+\begin{itemize}
+    \item Grande icône stylisée
+    \item Titre accrocheur
+    \item Description informative
+    \item Boîte d'astuce avec icône
+\end{itemize}
+
+\section{Améliorations Techniques}
+
+\subsection{Performance}
+
+\subsubsection{Indexation}
+
+Des index ont été ajoutés sur les champs fréquemment recherchés :
+\begin{itemize}
+    \item \texttt{titre} : Recherche textuelle
+    \item \texttt{auteur\_id} : Filtrage par auteur
+    \item \texttt{date\_note} : Tri et filtrage par date
+    \item \texttt{statut} : Filtrage par statut
+    \item \texttt{priority} : Tri par priorité
+    \item \texttt{is\_favorite} : Filtrage des favoris
+\end{itemize}
+
+\subsubsection{Optimisation des Requêtes}
+
+\begin{itemize}
+    \item Utilisation de \texttt{search\_fetch} pour les grandes listes
+    \item Calculs optimisés pour les statistiques
+    \item Mise en cache des préférences utilisateur
+\end{itemize}
+
+\subsection{Sécurité}
+
+\subsubsection{Droits d'Accès}
+
+Le fichier \texttt{ir.model.access.csv} définit :
+\begin{itemize}
+    \item Accès complet pour le modèle \texttt{tp.note.interne}
+    \item Accès au wizard de filtrage par date
+    \item Permissions : Lecture, Écriture, Création, Suppression
+\end{itemize}
+
+\subsubsection{Validation des Données}
+
+Des contraintes ont été ajoutées :
+\begin{itemize}
+    \item Validation de la date de note
+    \item Validation de la date d'échéance
+    \item Vérification de cohérence entre les dates
+\end{itemize}
+
+\subsection{Migrations}
+
+Un script de migration a été créé pour :
+\begin{itemize}
+    \item Ajouter les nouvelles colonnes (\texttt{priority}, \texttt{is\_favorite}, \texttt{date\_echeance})
+    \item Créer les index nécessaires
+    \item Préserver les données existantes
+    \item Appliquer les valeurs par défaut
+\end{itemize}
+
+\section{Notifications et Retours Utilisateur}
+
+\subsection{Système de Notifications}
+
+Toutes les actions importantes génèrent des notifications :
+\begin{itemize}
+    \item \textbf{Publication} : "X note(s) publiée(s) avec succès"
+    \item \textbf{Archivage} : "X note(s) archivée(s) avec succès"
+    \item \textbf{Restauration} : "X note(s) restaurée(s) avec succès"
+    \item \textbf{Suppression} : "X note(s) supprimée(s) avec succès"
+    \item \textbf{Favoris} : "Note ajoutée aux/retirée des favoris"
+\end{itemize}
+
+\subsection{Messages de Suivi}
+
+Le système de messagerie Odoo est utilisé pour :
+\begin{itemize}
+    \item Enregistrer les changements de statut
+    \item Historique des actions
+    \item Traçabilité complète
+\end{itemize}
+
+\section{Code Source}
+
+\subsection{Exemple de Modèle}
+
+\begin{lstlisting}[language=Python, caption=Modèle tp.note.interne (extrait)]
+from odoo import models, fields, api
+
+class TpNoteInterne(models.Model):
+    _name = "tp.note.interne"
+    _description = "Note Interne"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _order = 'date_note desc, create_date desc'
+    
+    titre = fields.Char(string="Titre", required=True, 
+                       tracking=True, index=True)
+    contenu = fields.Html(string="Contenu")
+    auteur_id = fields.Many2one("res.users", 
+                                default=lambda self: self.env.user,
+                                tracking=True, index=True)
+    date_note = fields.Date(string="Date", 
+                           default=fields.Date.today,
+                           tracking=True, index=True)
+    statut = fields.Selection([
+        ("brouillon", "Brouillon"),
+        ("publie", "Publié"),
+        ("archive", "Archivé"),
+    ], string="Statut", default="brouillon", 
+       tracking=True, index=True)
+    
+    priority = fields.Selection([
+        ('0', 'Basse'),
+        ('1', 'Normale'),
+        ('2', 'Haute'),
+        ('3', 'Urgente'),
+    ], string="Priorité", default='1', 
+       tracking=True, index=True)
+    
+    is_favorite = fields.Boolean(string="Favori", 
+                                default=False,
+                                tracking=True, index=True)
+    date_echeance = fields.Date(string="Date d'échéance",
+                                tracking=True)
+    
+    @api.depends('date_echeance', 'statut')
+    def _compute_is_overdue(self):
+        today = fields.Date.today()
+        for record in self:
+            record.is_overdue = (
+                record.date_echeance 
+                and record.date_echeance < today 
+                and record.statut != 'archive'
+            )
+\end{lstlisting}
+
+\subsection{Exemple de Vue}
+
+\begin{lstlisting}[language=XML, caption=Vue Liste (extrait)]
+<tree string="Notes Internes" 
+      editable="bottom" 
+      class="tp_note_dark tp_list_view"
+      decoration-success="statut == 'publie'"
+      decoration-warning="statut == 'brouillon'"
+      decoration-muted="statut == 'archive'"
+      default_order="date_note desc">
+    
+    <field name="is_favorite" widget="boolean_toggle"/>
+    <field name="priority" widget="priority"/>
+    <field name="titre" string="Titre"/>
+    <field name="auteur_id" widget="many2one_avatar_user"/>
+    <field name="date_note" widget="date"/>
+    <field name="statut" widget="badge"/>
+    
+    <button name="action_toggle_favorite" 
+            type="object" 
+            icon="fa-star"
+            invisible="not is_favorite"/>
+    <button name="action_publier" 
+            type="object" 
+            string="Publier" 
+            icon="fa-check"
+            invisible="statut != 'brouillon'"/>
+</tree>
+\end{lstlisting}
+
+\section{Conclusion}
+
+\subsection{Résultats Obtenus}
+
+Le module développé répond aux objectifs initiaux :
+
+\begin{itemize}
+    \item ✓ Système complet de gestion de notes internes
+    \item ✓ Interface moderne et intuitive
+    \item ✓ Thème sombre/clair fonctionnel
+    \item ✓ Fonctionnalités avancées (priorités, favoris, échéances)
+    \item ✓ Bonne expérience utilisateur
+    \item ✓ Code maintenable et extensible
+\end{itemize}
+
+\subsection{Perspectives d'Amélioration}
+
+Plusieurs améliorations pourraient être apportées :
+
+\begin{itemize}
+    \item \textbf{Catégories et Tags} : Système de catégorisation avancé
+    \item \textbf{Recherche Full-Text} : Recherche dans le contenu HTML
+    \item \textbf{Export PDF} : Génération de PDF pour les notes
+    \item \textbf{Partage} : Partage de notes entre utilisateurs
+    \item \textbf{Commentaires} : Système de commentaires collaboratif
+    \item \textbf{Dashboard} : Tableau de bord avec statistiques visuelles
+    \item \textbf{Notifications Email} : Alertes par email pour les échéances
+    \item \textbf{API REST} : API pour intégration externe
+\end{itemize}
+
+\subsection{Apprentissages}
+
+Ce projet a permis de :
+
+\begin{itemize}
+    \item Maîtriser le framework Odoo et son architecture MVC
+    \item Développer des interfaces utilisateur modernes avec CSS3
+    \item Implémenter des fonctionnalités complexes avec Python
+    \item Gérer les migrations de base de données
+    \item Optimiser les performances avec l'indexation
+    \item Améliorer l'expérience utilisateur avec des animations et notifications
+\end{itemize}
+
+\section{Annexes}
+
+\subsection{Structure Complète des Fichiers}
+
+\begin{lstlisting}[language=bash, caption=Arborescence complète]
+tp_gestion_notes/
+├── __init__.py
+├── __manifest__.py
+├── models/
+│   ├── __init__.py
+│   ├── note_interne.py (188 lignes)
+│   └── user_preferences.py
+├── views/
+│   ├── note_views.xml (306 lignes)
+│   ├── date_filter_wizard.xml (49 lignes)
+│   ├── wizard_view.xml (75 lignes)
+│   ├── categorie_views.xml
+│   ├── tag_views.xml
+│   └── user_preferences.xml
+├── wizards/
+│   ├── __init__.py
+│   ├── theme_config_wizard.py (51 lignes)
+│   └── date_filter_wizard.py (31 lignes)
+├── security/
+│   └── ir.model.access.csv
+├── static/
+│   ├── description/
+│   │   └── icon.png
+│   └── src/
+│       ├── css/
+│       │   ├── dark_theme.css (835 lignes)
+│       │   └── components.css (1013 lignes)
+│       └── js/
+│           ├── dark_theme.js (113 lignes)
+│           └── theme_config.js
+└── migrations/
+    ├── __init__.py
+    └── 3.2.0/
+        ├── __init__.py
+        └── post-migration.py
+\end{lstlisting}
+
+\subsection{Statistiques du Projet}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|r|}
+\hline
+\textbf{Élément} & \textbf{Nombre} \\
+\hline
+Fichiers Python & 5 \\
+Fichiers XML & 6 \\
+Fichiers CSS & 2 \\
+Fichiers JavaScript & 2 \\
+Lignes de code Python & ~300 \\
+Lignes de code XML & ~500 \\
+Lignes de code CSS & ~1800 \\
+Lignes de code JavaScript & ~150 \\
+\hline
+\textbf{Total} & \textbf{~2750 lignes} \\
+\hline
+\end{tabular}
+\caption{Statistiques du code source}
+\end{table}
+
+\subsection{Champs du Modèle}
+
+\begin{longtable}{|p{3cm}|p{2cm}|p{8cm}|}
+\hline
+\textbf{Champ} & \textbf{Type} & \textbf{Description} \\
+\hline
+titre & Char & Titre de la note (requis, indexé) \\
+contenu & Html & Contenu HTML de la note \\
+description & Text & Description courte \\
+auteur\_id & Many2one & Auteur (res.users, indexé) \\
+date\_note & Date & Date de création (indexé) \\
+date\_echeance & Date & Date d'échéance \\
+statut & Selection & Brouillon/Publié/Archivé (indexé) \\
+priority & Selection & 0-3: Basse/Normale/Haute/Urgente (indexé) \\
+is\_favorite & Boolean & Favori (indexé) \\
+is\_overdue & Boolean & En retard (calculé) \\
+theme\_couleur & Selection & Couleur du thème \\
+is\_dark\_mode & Boolean & Mode sombre activé \\
+display\_name & Char & Nom d'affichage (calculé) \\
+\hline
+\end{longtable}
+
+\subsection{Méthodes du Modèle}
+
+\begin{longtable}{|p{4cm}|p{9cm}|}
+\hline
+\textbf{Méthode} & \textbf{Description} \\
+\hline
+\_compute\_display\_name & Calcule le nom d'affichage avec icônes de priorité \\
+\_compute\_is\_overdue & Calcule si la note est en retard \\
+\_check\_dates & Valide les dates (note et échéance) \\
+action\_toggle\_favorite & Bascule le statut favori avec notification \\
+action\_publier & Publie la note avec notification \\
+action\_archiver & Archive la note avec notification \\
+action\_restaurer & Restaure une note archivée \\
+action\_supprimer & Supprime la note avec confirmation \\
+get\_statistics & Retourne les statistiques pour le dashboard \\
+\hline
+\end{longtable}
+
+\vspace{2cm}
+
+\begin{center}
+\textit{Fin du rapport}
+\end{center}
+
+\end{document}
+

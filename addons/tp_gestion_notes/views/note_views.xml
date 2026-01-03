@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Vue Liste avec classes dark theme -->
+        <record id="view_tp_note_interne_tree" model="ir.ui.view">
+            <field name="name">tp.note.interne.tree</field>
+            <field name="model">tp.note.interne</field>
+            <field name="arch" type="xml">
+                <tree string="Notes Internes" 
+                      editable="bottom" 
+                      class="tp_note_dark tp_list_view"
+                      decoration-success="statut == 'publie'"
+                      decoration-warning="statut == 'brouillon'"
+                      decoration-muted="statut == 'archive'"
+                      create="1"
+                      delete="1"
+                      default_order="date_note desc">
+                    
+                    <field name="is_favorite" widget="boolean_toggle" class="tp_list_favorite"/>
+                    <field name="priority" widget="priority" class="tp_list_priority"/>
+                    <field name="titre" string="Titre" class="tp_list_title"/>
+                    <field name="auteur_id" string="Auteur" widget="many2one_avatar_user" class="tp_list_author"/>
+                    <field name="date_note" string="Date" widget="date" class="tp_list_date"/>
+                    <field name="date_echeance" string="Échéance" widget="date" optional="hide" class="tp_list_echeance"/>
+                    <field name="statut" string="Statut" widget="badge" class="tp_list_status"/>
+                    <field name="description" string="Description" optional="hide" class="tp_list_description"/>
+                    
+                    <button name="action_toggle_favorite" 
+                            type="object" 
+                            icon="fa-star"
+                            class="btn tp_list_action_btn tp_favorite_btn"
+                            invisible="not is_favorite"/>
+                    <button name="action_toggle_favorite" 
+                            type="object" 
+                            icon="fa-star-o"
+                            class="btn tp_list_action_btn tp_favorite_btn"
+                            invisible="is_favorite"/>
+                    
+                    <button name="action_publier" 
+                            type="object" 
+                            string="Publier" 
+                            icon="fa-check"
+                            class="btn btn-success tp_list_action_btn"
+                            invisible="statut != 'brouillon'"/>
+                            
+                    <button name="action_archiver" 
+                            type="object" 
+                            string="Archiver" 
+                            icon="fa-archive"
+                            class="btn btn-secondary tp_list_action_btn"
+                            invisible="statut != 'publie'"/>
+                    
+                    <button name="action_restaurer" 
+                            type="object" 
+                            string="Restaurer" 
+                            icon="fa-undo"
+                            class="btn btn-info tp_list_action_btn"
+                            invisible="statut != 'archive'"/>
+
+                    <button name="action_supprimer" 
+                            type="object" 
+                            icon="fa-trash"
+                            class="btn btn-danger tp_list_action_btn"
+                            confirm="Êtes-vous sûr de vouloir supprimer cette note ?"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Vue Formulaire avec design dark theme -->
+        <record id="view_tp_note_interne_form" model="ir.ui.view">
+            <field name="name">tp.note.interne.form</field>
+            <field name="model">tp.note.interne</field>
+            <field name="arch" type="xml">
+                <form string="Note Interne" class="tp_note_dark">
+                    <header class="tp_note_header">
+                        <div class="d-flex justify-content-between align-items-center w-100">
+                            <div class="d-flex gap-2">
+                                <button name="action_toggle_favorite" 
+                                        type="object" 
+                                        class="btn tp_action_btn tp_favorite_header_btn"
+                                        icon="fa-star"
+                                        invisible="not is_favorite"
+                                        title="Retirer des favoris"/>
+                                <button name="action_toggle_favorite" 
+                                        type="object" 
+                                        class="btn tp_action_btn tp_favorite_header_btn"
+                                        icon="fa-star-o"
+                                        invisible="is_favorite"
+                                        title="Ajouter aux favoris"/>
+                                
+                                <button name="action_publier" 
+                                        type="object" 
+                                        string="Publier" 
+                                        class="btn btn-success tp_action_btn"
+                                        icon="fa-check"
+                                        invisible="statut != 'brouillon'"/>
+                                        
+                                <button name="action_archiver" 
+                                        type="object" 
+                                        string="Archiver"
+                                        class="btn btn-secondary tp_action_btn"
+                                        icon="fa-archive"
+                                        invisible="statut != 'publie'"/>
+                                
+                                <button name="action_restaurer" 
+                                        type="object" 
+                                        string="Restaurer"
+                                        class="btn btn-info tp_action_btn"
+                                        icon="fa-undo"
+                                        invisible="statut != 'archive'"/>
+                                        
+                                <button name="action_supprimer" 
+                                        type="object" 
+                                        string="Supprimer" 
+                                        class="btn btn-danger tp_action_btn"
+                                        icon="fa-trash"
+                                        confirm="Êtes-vous sûr de vouloir supprimer cette note ?"/>
+                            </div>
+                            <field name="statut" widget="statusbar" statusbar_visible="brouillon,publie,archive" class="tp_statusbar"/>
+                        </div>
+                    </header>
+                    
+                    <sheet class="tp_note_card tp_form_sheet">
+                        <div class="oe_title tp_title_section">
+                            <label for="titre" class="oe_edit_only"/>
+                            <h1 class="tp_form_title">
+                                <field name="titre" placeholder="Titre de la note..." class="tp_dark_input tp_title_input"/>
+                            </h1>
+                            <div class="text-muted font-italic tp_description_wrapper">
+                                <field name="description" placeholder="Ajoutez une description courte..." class="tp_dark_input tp_description_input"/>
+                            </div>
+                        </div>
+
+                        <div class="tp_divider"></div>
+
+                        <group class="tp_metadata_group">
+                            <group string="Informations" class="tp_info_group">
+                                <field name="priority" widget="priority" class="tp_metadata_field"/>
+                                <field name="auteur_id" widget="many2one_avatar_user" class="tp_metadata_field"/>
+                                <field name="date_note" widget="date" class="tp_metadata_field"/>
+                                <field name="date_echeance" widget="date" class="tp_metadata_field"/>
+                                <field name="is_favorite" widget="boolean_toggle" class="tp_metadata_field"/>
+                            </group>
+                        </group>
+
+                        <div class="tp_divider"></div>
+
+                        <notebook class="tp_notebook">
+                            <page string="Contenu" name="contenu_page" icon="fa-file-text-o" class="tp_content_page">
+                                <div class="tp_content_wrapper">
+                                    <field name="contenu" widget="html" class="tp_dark_editor tp_content_editor" placeholder="Rédigez votre note ici..."/>
+                                </div>
+                            </page>
+                            <page string="Informations" name="info_page" icon="fa-info-circle" class="tp_info_page">
+                                <group class="tp_info_group">
+                                    <group string="Suivi" class="tp_tracking_group">
+                                        <field name="create_date" widget="datetime" readonly="1" class="tp_tracking_field"/>
+                                        <field name="create_uid" widget="many2one_avatar_user" readonly="1" class="tp_tracking_field"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Vue Kanban dark theme -->
+        <record id="view_tp_note_interne_kanban" model="ir.ui.view">
+            <field name="name">tp.note.interne.kanban</field>
+            <field name="model">tp.note.interne</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="statut" class="tp_note_dark tp_kanban_view">
+                    <field name="titre"/>
+                    <field name="auteur_id"/>
+                    <field name="date_note"/>
+                    <field name="date_echeance"/>
+                    <field name="statut"/>
+                    <field name="priority"/>
+                    <field name="is_favorite"/>
+                    <field name="description"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click tp_kanban_card">
+                                <div class="tp_kanban_header">
+                                    <div class="tp_kanban_priority" t-if="record.priority.raw_value == '3'">
+                                        <i class="fa fa-fire" style="color: #e74c3c;"></i>
+                                    </div>
+                                    <div class="tp_kanban_favorite" t-if="record.is_favorite.raw_value">
+                                        <i class="fa fa-star" style="color: #f39c12;"></i>
+                                    </div>
+                                    <div class="tp_kanban_status_badge">
+                                        <field name="statut" widget="badge"/>
+                                    </div>
+                                </div>
+                                <div class="tp_kanban_body">
+                                    <div class="tp_kanban_title">
+                                        <strong>
+                                            <field name="titre"/>
+                                        </strong>
+                                    </div>
+                                    <div class="tp_kanban_priority_badge" t-if="record.priority.raw_value">
+                                        <field name="priority" widget="priority"/>
+                                    </div>
+                                    <div class="tp_kanban_description" t-if="record.description.raw_value">
+                                        <small class="text-muted">
+                                            <field name="description"/>
+                                        </small>
+                                    </div>
+                                    <div class="tp_kanban_metadata">
+                                        <div class="tp_kanban_author">
+                                            <field name="auteur_id" widget="many2one_avatar_user" options="{'avatar_field': 'image_128'}"/>
+                                        </div>
+                                        <div class="tp_kanban_date">
+                                            <small class="text-muted">
+                                                <i class="fa fa-calendar mr-1"></i>
+                                                <field name="date_note" widget="relative"/>
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <!-- Vue Recherche -->
+        <record id="view_tp_note_interne_search" model="ir.ui.view">
+            <field name="name">tp.note.interne.search</field>
+            <field name="model">tp.note.interne</field>
+            <field name="arch" type="xml">
+                <search string="Recherche Notes" class="tp_search_view">
+                    <field name="titre" string="Titre"/>
+                    <field name="auteur_id" string="Auteur"/>
+                    <field name="description" string="Description"/>
+                    <filter string="Mes Notes" name="mes_notes" domain="[('auteur_id', '=', uid)]" icon="fa-user"/>
+                    <filter string="Favoris" name="favoris" domain="[('is_favorite', '=', True)]" icon="fa-star"/>
+                    <filter string="Brouillons" name="brouillon" domain="[('statut', '=', 'brouillon')]" icon="fa-file-text-o"/>
+                    <filter string="Publiés" name="publie" domain="[('statut', '=', 'publie')]" icon="fa-check-circle"/>
+                    <filter string="Archivés" name="archive" domain="[('statut', '=', 'archive')]" icon="fa-archive"/>
+                    <separator/>
+                    <filter string="Urgentes" name="urgentes" domain="[('priority', '=', '3')]" icon="fa-exclamation-triangle"/>
+                    <filter string="En retard" name="en_retard" domain="[('date_echeance', '&lt;', context_today().strftime('%Y-%m-%d')), ('statut', '!=', 'archive')]" icon="fa-clock-o" help="Notes avec date d'échéance dépassée"/>
+                    <group expand="0" string="Regrouper par">
+                        <filter string="Auteur" name="group_auteur" context="{'group_by': 'auteur_id'}" icon="fa-users"/>
+                        <filter string="Statut" name="group_statut" context="{'group_by': 'statut'}" icon="fa-tags"/>
+                        <filter string="Date" name="group_date" context="{'group_by': 'date_note'}" icon="fa-calendar"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Action serveur pour ouvrir le wizard de filtrage par date -->
+        <record id="action_server_open_date_filter" model="ir.actions.server">
+            <field name="name">Afficher notes par date</field>
+            <field name="model_id" ref="model_tp_note_interne"/>
+            <field name="binding_model_id" ref="model_tp_note_interne"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+action = {
+    'type': 'ir.actions.act_window',
+    'res_model': 'tp.date.filter.wizard',
+    'view_mode': 'form',
+    'target': 'new',
+    'name': 'Afficher notes par date',
+}
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_tp_note_interne" model="ir.actions.act_window">
+            <field name="name">Notes Internes</field>
+            <field name="res_model">tp.note.interne</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="search_view_id" ref="view_tp_note_interne_search"/>
+            <field name="help" type="html">
+                <div class="tp_empty_state">
+                    <div class="tp_empty_state_icon">
+                        <i class="fa fa-sticky-note fa-4x"></i>
+                    </div>
+                    <h3 class="tp_empty_state_title">Créez votre première note interne</h3>
+                    <p class="tp_empty_state_description">
+                        Commencez à documenter vos idées, informations importantes et notes de travail.
+                    </p>
+                    <div class="tp_empty_state_hint">
+                        <small>
+                            <i class="fa fa-lightbulb-o mr-1"></i>
+                            Astuce : Utilisez le bouton en bas à droite pour basculer entre les thèmes clair et sombre
+                        </small>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="menu_tp_notes" name="Notes Internes" sequence="10"/>
+        <menuitem id="menu_tp_notes_list" name="Liste des notes" parent="menu_tp_notes" action="action_tp_note_interne" sequence="10"/>
+                  
+    </data>
+</odoo>
+

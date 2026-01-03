@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tp_note_interne,tp.note.interne,model_tp_note_interne,,1,1,1,1
+access_tp_date_filter_wizard,tp.date.filter.wizard,model_tp_date_filter_wizard,,1,1,1,1
+

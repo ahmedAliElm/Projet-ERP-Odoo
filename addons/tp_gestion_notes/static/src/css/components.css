@@ -1,0 +1,1012 @@
+/* Classes pour inputs dark theme */
+.tp_dark_input input {
+    background-color: #2d3136 !important;
+    color: #e4e6eb !important;
+    border: 1px solid #3e4147 !important;
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+.tp_dark_input input:focus {
+    border-color: #4a90e2 !important;
+    box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.25);
+}
+
+/* Éditeur HTML dark */
+.tp_dark_editor .note-editor {
+    background-color: #2d3136 !important;
+    border: 1px solid #3e4147 !important;
+}
+
+.tp_dark_editor .note-editable {
+    background-color: #2d3136 !important;
+    color: #e4e6eb !important;
+    min-height: 300px;
+}
+
+/* Cards avec effet de profondeur */
+.tp_note_card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tp_note_card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Bouton de toggle theme amélioré */
+.tp_theme_toggle {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.tp_theme_toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Badges améliorés */
+.tp_note_dark .badge {
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 12px;
+}
+
+/* Statusbar custom */
+.tp_note_header .o_statusbar {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* Animation pour les transitions de thème */
+body, .o_web_client {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar personnalisée */
+.tp_note_dark ::-webkit-scrollbar {
+    width: 10px;
+}
+
+.tp_note_dark ::-webkit-scrollbar-track {
+    background: #2d3136;
+}
+
+.tp_note_dark ::-webkit-scrollbar-thumb {
+    background: #4a90e2;
+    border-radius: 5px;
+}
+
+.tp_note_dark ::-webkit-scrollbar-thumb:hover {
+    background: #3a7bc8;
+}
+
+/* Loader pour le dark theme */
+.tp_dark_loader {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #3e4147;
+    border-radius: 50%;
+    border-top-color: #4a90e2;
+    animation: tp_spin 1s ease-in-out infinite;
+}
+
+@keyframes tp_spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Tooltips dark theme */
+.tp_dark_tooltip .tooltip-inner {
+    background-color: #2d3136 !important;
+    color: #e4e6eb !important;
+    border: 1px solid #3e4147 !important;
+}
+
+.tp_dark_tooltip .arrow::before {
+    border-top-color: #2d3136 !important;
+}
+
+/* ============================================
+   ENHANCED FORM VIEW STYLING
+   ============================================ */
+
+/* Form Sheet */
+.tp_form_sheet {
+    padding: 24px !important;
+    background: linear-gradient(135deg, rgba(45, 49, 54, 0.95) 0%, rgba(61, 66, 73, 0.95) 100%) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Title Section */
+.tp_title_section {
+    margin-bottom: 24px;
+}
+
+.tp_form_title {
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 12px !important;
+    color: var(--dark-text, #e4e6eb) !important;
+    letter-spacing: -0.5px;
+}
+
+.tp_title_input input {
+    font-size: 2rem !important;
+    font-weight: 600 !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    background: transparent !important;
+    padding: 8px 0 !important;
+    transition: border-color 0.3s ease;
+}
+
+.tp_title_input input:focus {
+    border-bottom-color: var(--dark-accent, #4a90e2) !important;
+    box-shadow: none !important;
+}
+
+.tp_description_wrapper {
+    margin-top: 8px;
+}
+
+.tp_description_input textarea {
+    font-size: 1.1em !important;
+    line-height: 1.6 !important;
+    border: none !important;
+    border-bottom: 1px solid transparent !important;
+    background: transparent !important;
+    padding: 8px 0 !important;
+    resize: none;
+    transition: border-color 0.3s ease;
+}
+
+.tp_description_input textarea:focus {
+    border-bottom-color: var(--dark-accent, #4a90e2) !important;
+    box-shadow: none !important;
+}
+
+/* Divider */
+.tp_divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--dark-border, #3e4147), transparent);
+    margin: 24px 0;
+}
+
+/* Metadata Group */
+.tp_metadata_group {
+    margin: 24px 0;
+}
+
+.tp_info_group {
+    padding: 16px;
+    background: rgba(45, 49, 54, 0.5);
+    border-radius: 8px;
+    border: 1px solid var(--dark-border, #3e4147);
+}
+
+.tp_metadata_field {
+    margin-bottom: 12px;
+}
+
+.tp_metadata_field:last-child {
+    margin-bottom: 0;
+}
+
+/* Action Buttons */
+.tp_action_btn {
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.tp_action_btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+}
+
+.tp_action_btn.btn-success {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
+    border: none !important;
+}
+
+.tp_action_btn.btn-secondary {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%) !important;
+    border: none !important;
+}
+
+.tp_action_btn.btn-danger {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+    border: none !important;
+}
+
+/* Statusbar */
+.tp_statusbar {
+    margin-left: auto;
+}
+
+.tp_statusbar .o_statusbar_status {
+    background: rgba(45, 49, 54, 0.8) !important;
+    border-radius: 8px !important;
+    padding: 4px !important;
+}
+
+/* Notebook */
+.tp_notebook {
+    margin-top: 24px;
+}
+
+.tp_notebook .nav-tabs {
+    border-bottom: 2px solid var(--dark-border, #3e4147);
+    margin-bottom: 20px;
+}
+
+.tp_notebook .nav-tabs .nav-link {
+    padding: 12px 24px !important;
+    border: none !important;
+    border-bottom: 3px solid transparent !important;
+    background: transparent !important;
+    color: var(--dark-text-secondary, #b0b3b8) !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease;
+    margin-right: 8px;
+    border-radius: 8px 8px 0 0;
+}
+
+.tp_notebook .nav-tabs .nav-link:hover {
+    color: var(--dark-text, #e4e6eb) !important;
+    background: rgba(45, 49, 54, 0.5) !important;
+}
+
+.tp_notebook .nav-tabs .nav-link.active {
+    color: var(--dark-accent, #4a90e2) !important;
+    border-bottom-color: var(--dark-accent, #4a90e2) !important;
+    background: transparent !important;
+}
+
+.tp_content_wrapper {
+    padding: 20px;
+    background: rgba(45, 49, 54, 0.3);
+    border-radius: 8px;
+    border: 1px solid var(--dark-border, #3e4147);
+}
+
+.tp_content_editor {
+    min-height: 400px;
+}
+
+.tp_tracking_group {
+    padding: 16px;
+    background: rgba(45, 49, 54, 0.5);
+    border-radius: 8px;
+}
+
+.tp_tracking_field {
+    margin-bottom: 12px;
+}
+
+/* ============================================
+   ENHANCED LIST VIEW STYLING
+   ============================================ */
+
+.tp_list_view {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tp_list_view .o_list_table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.tp_list_view .o_list_table thead th {
+    background: linear-gradient(135deg, rgba(45, 49, 54, 0.95) 0%, rgba(61, 66, 73, 0.95) 100%) !important;
+    padding: 16px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--dark-border, #3e4147) !important;
+}
+
+.tp_list_view .o_list_table tbody tr {
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(62, 65, 71, 0.3);
+}
+
+.tp_list_view .o_list_table tbody tr:hover {
+    background: rgba(45, 49, 54, 0.6) !important;
+    transform: scale(1.01);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tp_list_title {
+    font-weight: 600 !important;
+    color: var(--dark-text, #e4e6eb) !important;
+}
+
+.tp_list_author {
+    display: flex;
+    align-items: center;
+}
+
+.tp_list_date {
+    color: var(--dark-text-secondary, #b0b3b8) !important;
+    font-size: 0.9em;
+}
+
+.tp_list_status .badge {
+    padding: 6px 12px !important;
+    font-weight: 500 !important;
+    border-radius: 12px !important;
+    font-size: 0.85em;
+}
+
+.tp_list_action_btn {
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    font-size: 0.85em !important;
+    margin: 0 2px !important;
+    transition: all 0.2s ease !important;
+}
+
+.tp_list_action_btn:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ============================================
+   ENHANCED KANBAN VIEW STYLING
+   ============================================ */
+
+.tp_kanban_view {
+    padding: 16px;
+}
+
+.tp_kanban_card {
+    background: linear-gradient(135deg, rgba(45, 49, 54, 0.95) 0%, rgba(61, 66, 73, 0.95) 100%) !important;
+    border: 1px solid var(--dark-border, #3e4147) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    margin-bottom: 16px !important;
+    min-height: 180px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.tp_kanban_card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--dark-accent, #4a90e2), var(--dark-info, #3498db));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tp_kanban_card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+    border-color: var(--dark-accent, #4a90e2) !important;
+}
+
+.tp_kanban_card:hover::before {
+    opacity: 1;
+}
+
+.tp_kanban_header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+}
+
+.tp_kanban_status_badge {
+    z-index: 1;
+}
+
+.tp_kanban_status_badge .badge {
+    padding: 6px 12px !important;
+    font-weight: 500 !important;
+    border-radius: 12px !important;
+    font-size: 0.85em;
+}
+
+.tp_kanban_body {
+    flex: 1;
+}
+
+.tp_kanban_title {
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.tp_kanban_title strong {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--dark-text, #e4e6eb) !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tp_kanban_description {
+    margin-bottom: 16px;
+    color: var(--dark-text-secondary, #b0b3b8) !important;
+    line-height: 1.5;
+    font-size: 0.9em;
+}
+
+.tp_kanban_metadata {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid rgba(62, 65, 71, 0.5);
+}
+
+.tp_kanban_author {
+    display: flex;
+    align-items: center;
+}
+
+.tp_kanban_date {
+    display: flex;
+    align-items: center;
+    color: var(--dark-text-secondary, #b0b3b8) !important;
+}
+
+.tp_kanban_date i {
+    margin-right: 4px;
+}
+
+/* ============================================
+   ENHANCED EMPTY STATE STYLING
+   ============================================ */
+
+.tp_empty_state {
+    text-align: center;
+    padding: 60px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.tp_empty_state_icon {
+    margin-bottom: 24px;
+    opacity: 0.6;
+    animation: tp_fadeIn 0.6s ease;
+}
+
+.tp_empty_state_icon i {
+    color: var(--dark-accent, #4a90e2);
+    text-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+}
+
+.tp_empty_state_title {
+    font-size: 1.8em;
+    font-weight: 600;
+    color: var(--dark-text, #e4e6eb) !important;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.tp_empty_state_description {
+    font-size: 1.1em;
+    color: var(--dark-text-secondary, #b0b3b8) !important;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+.tp_empty_state_hint {
+    padding: 16px;
+    background: rgba(45, 49, 54, 0.5);
+    border-radius: 8px;
+    border: 1px dashed var(--dark-border, #3e4147);
+    color: var(--dark-text-secondary, #b0b3b8) !important;
+}
+
+.tp_empty_state_hint i {
+    color: var(--dark-warning, #f39c12);
+    margin-right: 6px;
+}
+
+@keyframes tp_fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 0.6;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    .tp_form_sheet {
+        padding: 16px !important;
+    }
+    
+    .tp_form_title {
+        font-size: 1.5rem !important;
+    }
+    
+    .tp_action_btn {
+        padding: 8px 16px !important;
+        font-size: 0.9em !important;
+    }
+    
+    .tp_kanban_card {
+        min-height: 160px !important;
+        padding: 16px !important;
+    }
+    
+    .tp_empty_state {
+        padding: 40px 20px;
+    }
+    
+    .tp_empty_state_title {
+        font-size: 1.4em;
+    }
+}
+
+/* ============================================
+   LIGHT MODE ENHANCEMENTS
+   ============================================ */
+
+body:not(.o_dark_mode) .tp_form_sheet {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+body:not(.o_dark_mode) .tp_form_title {
+    color: #2c3e50 !important;
+}
+
+body:not(.o_dark_mode) .tp_kanban_card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.95) 100%) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+body:not(.o_dark_mode) .tp_kanban_card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+}
+
+body:not(.o_dark_mode) .tp_empty_state_title {
+    color: #2c3e50 !important;
+}
+
+body:not(.o_dark_mode) .tp_empty_state_description {
+    color: #6c757d !important;
+}
+
+/* ============================================
+   FAVORITE BUTTON STYLING
+   ============================================ */
+
+.tp_favorite_btn,
+.tp_favorite_header_btn {
+    color: #f39c12 !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 8px !important;
+    transition: all 0.3s ease !important;
+}
+
+.tp_favorite_btn:hover,
+.tp_favorite_header_btn:hover {
+    color: #e67e22 !important;
+    transform: scale(1.2) !important;
+    background: rgba(243, 156, 18, 0.1) !important;
+}
+
+.tp_favorite_btn .fa-star,
+.tp_favorite_header_btn .fa-star {
+    color: #f39c12 !important;
+    text-shadow: 0 0 8px rgba(243, 156, 18, 0.5);
+}
+
+.tp_list_favorite {
+    text-align: center;
+}
+
+.tp_list_favorite .o_boolean_toggle {
+    color: #f39c12;
+}
+
+/* ============================================
+   PRIORITY STYLING
+   ============================================ */
+
+.tp_list_priority .o_priority {
+    font-size: 1.1em;
+}
+
+.tp_list_priority .o_priority .fa-star {
+    color: #f39c12;
+}
+
+.tp_list_priority .o_priority .fa-star.filled {
+    color: #e74c3c;
+}
+
+.tp_kanban_priority {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 1.2em;
+    z-index: 2;
+}
+
+.tp_kanban_favorite {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 1.2em;
+    z-index: 2;
+}
+
+.tp_kanban_priority_badge {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.tp_list_priority {
+    text-align: center;
+}
+
+.tp_list_echeance {
+    color: var(--dark-text-secondary, #b0b3b8) !important;
+}
+
+.tp_list_echeance.o_date_overdue {
+    color: #e74c3c !important;
+    font-weight: 600;
+}
+
+/* ============================================
+   ENHANCED ACTION BUTTONS
+   ============================================ */
+
+.tp_action_btn.btn-info {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+    border: none !important;
+}
+
+.tp_list_action_btn.btn-info {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%) !important;
+    border: none !important;
+}
+
+/* ============================================
+   STATISTICS AND COUNTERS
+   ============================================ */
+
+.tp_statistics_card {
+    background: linear-gradient(135deg, rgba(45, 49, 54, 0.95) 0%, rgba(61, 66, 73, 0.95) 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tp_statistics_item {
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.tp_statistics_item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tp_statistics_number {
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--dark-accent, #4a90e2);
+    margin-bottom: 5px;
+}
+
+.tp_statistics_label {
+    font-size: 0.9em;
+    color: var(--dark-text-secondary, #b0b3b8);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ============================================
+   OVERDUE INDICATOR
+   ============================================ */
+
+.tp_overdue_indicator {
+    display: inline-block;
+    padding: 4px 8px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.tp_overdue_indicator::before {
+    content: "⚠ ";
+    margin-right: 4px;
+}
+
+/* ============================================
+   KANBAN CARD ENHANCEMENTS
+   ============================================ */
+
+.tp_kanban_card.tp_urgent {
+    border-left: 4px solid #e74c3c;
+}
+
+.tp_kanban_card.tp_favorite {
+    border-top: 3px solid #f39c12;
+}
+
+.tp_kanban_card.tp_overdue {
+    border-right: 4px solid #e74c3c;
+    animation: tp_pulse 2s infinite;
+}
+
+@keyframes tp_pulse {
+    0%, 100% {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    50% {
+        box-shadow: 0 2px 8px rgba(231, 76, 60, 0.4);
+    }
+}
+
+/* ============================================
+   SEARCH HIGHLIGHTING
+   ============================================ */
+
+.tp_search_highlight {
+    background: rgba(243, 156, 18, 0.3);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
+/* ============================================
+   NOTIFICATION STYLING
+   ============================================ */
+
+.o_notification {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.o_notification.o_notification_success {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+}
+
+.o_notification.o_notification_info {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+.o_notification.o_notification_warning {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+}
+
+.o_notification.o_notification_danger {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+/* ============================================
+   RESPONSIVE IMPROVEMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+    .tp_statistics_card {
+        padding: 15px;
+    }
+    
+    .tp_statistics_number {
+        font-size: 1.5em;
+    }
+    
+    .tp_kanban_priority,
+    .tp_kanban_favorite {
+        font-size: 1em;
+    }
+}
+
+/* ============================================
+   ENHANCED SEARCH VIEW STYLING
+   ============================================ */
+
+.tp_search_view .o_searchview {
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.tp_search_view .o_searchview_input_container {
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.tp_search_view .o_searchview_input_container:focus-within {
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.tp_search_view .o_searchview_facet {
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin: 2px;
+    transition: all 0.2s ease;
+}
+
+.tp_search_view .o_searchview_facet:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tp_search_view .o_filters_menu,
+.tp_search_view .o_group_by_menu,
+.tp_search_view .o_favorites_menu {
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.tp_search_view .o_menu_item {
+    padding: 10px 16px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    margin: 2px 0;
+}
+
+.tp_search_view .o_menu_item:hover {
+    background: rgba(74, 144, 226, 0.1);
+    transform: translateX(4px);
+}
+
+.tp_search_view .o_menu_item i {
+    margin-right: 8px;
+    width: 16px;
+    text-align: center;
+}
+
+/* Filter badges */
+.tp_search_view .o_searchview_facet_label {
+    font-weight: 500;
+}
+
+.tp_search_view .o_facet_remove {
+    margin-left: 6px;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.tp_search_view .o_facet_remove:hover {
+    opacity: 1;
+}
+
+/* ============================================
+   FILTER, GROUP BY, AND FAVORITES BUTTONS - WHITE COLOR
+   ============================================ */
+
+/* Filter, Group By, and Favorites dropdown buttons */
+.o_control_panel .o_searchview .o_searchview_filters,
+.o_control_panel .o_searchview .o_searchview_groupby,
+.o_control_panel .o_searchview .o_searchview_favorites,
+.o_control_panel .o_search_options .o_dropdown,
+.o_control_panel .o_search_options .o_dropdown_toggle,
+.o_control_panel .o_search_options button,
+.o_control_panel .o_search_options .btn,
+.o_searchview .o_searchview_filters,
+.o_searchview .o_searchview_groupby,
+.o_searchview .o_searchview_favorites,
+.o_searchview .o_searchview_filters .dropdown-toggle,
+.o_searchview .o_searchview_groupby .dropdown-toggle,
+.o_searchview .o_searchview_favorites .dropdown-toggle {
+    color: #ffffff !important;
+}
+
+/* Filter, Group By, and Favorites button text and icons */
+.o_control_panel .o_searchview .o_searchview_filters .dropdown-toggle,
+.o_control_panel .o_searchview .o_searchview_groupby .dropdown-toggle,
+.o_control_panel .o_searchview .o_searchview_favorites .dropdown-toggle,
+.o_searchview .o_searchview_filters .dropdown-toggle,
+.o_searchview .o_searchview_groupby .dropdown-toggle,
+.o_searchview .o_searchview_favorites .dropdown-toggle,
+.o_searchview .o_searchview_filters button,
+.o_searchview .o_searchview_groupby button,
+.o_searchview .o_searchview_favorites button {
+    color: #ffffff !important;
+}
+
+/* Ensure all text and icons inside these buttons are white */
+.o_searchview .o_searchview_filters *,
+.o_searchview .o_searchview_groupby *,
+.o_searchview .o_searchview_favorites *,
+.o_searchview .o_searchview_filters .fa,
+.o_searchview .o_searchview_groupby .fa,
+.o_searchview .o_searchview_favorites .fa,
+.o_searchview .o_searchview_filters i,
+.o_searchview .o_searchview_groupby i,
+.o_searchview .o_searchview_favorites i {
+    color: #ffffff !important;
+}
+
+/* For Odoo 15+ control panel structure */
+.o_control_panel .o_cp_searchview .o_searchview .o_searchview_filters,
+.o_control_panel .o_cp_searchview .o_searchview .o_searchview_groupby,
+.o_control_panel .o_cp_searchview .o_searchview .o_searchview_favorites,
+.o_control_panel .o_cp_searchview .o_searchview .o_searchview_filters .dropdown-toggle,
+.o_control_panel .o_cp_searchview .o_searchview .o_searchview_groupby .dropdown-toggle,
+.o_control_panel .o_cp_searchview .o_searchview .o_searchview_favorites .dropdown-toggle {
+    color: #ffffff !important;
+}
+
+/* Alternative selectors for different Odoo versions */
+.o_search_options .o_dropdown .dropdown-toggle,
+.o_search_options .o_dropdown button,
+.o_search_options .o_dropdown .btn {
+    color: #ffffff !important;
+}
+
+/* Ensure icons are white too */
+.o_search_options .o_dropdown .fa,
+.o_search_options .o_dropdown i,
+.o_searchview .o_searchview_filters .fa,
+.o_searchview .o_searchview_groupby .fa,
+.o_searchview .o_searchview_favorites .fa {
+    color: #ffffff !important;
+}
+
+/* For the button labels/text */
+.o_searchview .o_searchview_filters .dropdown-toggle span,
+.o_searchview .o_searchview_groupby .dropdown-toggle span,
+.o_searchview .o_searchview_favorites .dropdown-toggle span {
+    color: #ffffff !important;
+}
+
+/* General rule for all search option buttons - ensure white color */
+.o_control_panel .o_search_options .o_dropdown button,
+.o_control_panel .o_search_options .o_dropdown .dropdown-toggle,
+.o_searchview .o_searchview_filters button,
+.o_searchview .o_searchview_groupby button,
+.o_searchview .o_searchview_favorites button,
+.o_searchview .o_searchview_filters .dropdown-toggle,
+.o_searchview .o_searchview_groupby .dropdown-toggle,
+.o_searchview .o_searchview_favorites .dropdown-toggle {
+    color: #ffffff !important;
+}
+
+/* Ensure all child elements are white too */
+.o_searchview .o_searchview_filters *,
+.o_searchview .o_searchview_groupby *,
+.o_searchview .o_searchview_favorites * {
+    color: #ffffff !important;
+}
+
+/* Override any dark mode colors for these specific buttons */
+.o_dark_mode .o_searchview .o_searchview_filters,
+.o_dark_mode .o_searchview .o_searchview_groupby,
+.o_dark_mode .o_searchview .o_searchview_favorites,
+.o_dark_mode .o_searchview .o_searchview_filters *,
+.o_dark_mode .o_searchview .o_searchview_groupby *,
+.o_dark_mode .o_searchview .o_searchview_favorites * {
+    color: #ffffff !important;
+}
+

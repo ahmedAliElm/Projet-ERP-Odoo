@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Vue pour le wizard de configuration de thème -->
+        <record id="view_theme_config_wizard_form" model="ir.ui.view">
+            <field name="name">tp.theme.config.wizard.form</field>
+            <field name="model">tp.theme.config.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Configuration du thème">
+                    <sheet>
+                        <div class="alert alert-info" role="alert">
+                            <i class="fa fa-info-circle mr-2"></i>
+                            Configurez l'apparence de votre module Notes Internes
+                        </div>
+                        
+                        <group>
+                            <group string="Mode d'affichage">
+                                <field name="dark_mode" widget="boolean_button"
+                                       options='{"terminology": "sombre", "string_true": "Mode sombre activé", "string_false": "Mode sombre désactivé"}'/>
+                            </group>
+                            
+                            <group string="Couleurs">
+                                <field name="primary_color" widget="color"/>
+                                <div class="mt-2">
+                                    <small class="text-muted">
+                                        <i class="fa fa-palette mr-1"></i>
+                                        Choisissez la couleur principale de l'interface
+                                    </small>
+                                </div>
+                            </group>
+                        </group>
+                        
+                        <group>
+                            <field name="font_size" widget="radio"/>
+                            <field name="apply_to_all" widget="boolean_button"
+                                   options='{"terminology": "appliquer", "string_true": "Appliquer à toutes les notes", "string_false": "Ne pas appliquer aux notes existantes"}'/>
+                        </group>
+                    </sheet>
+                    
+                    <footer>
+                        <button name="action_preview_theme" 
+                                type="object" 
+                                string="Prévisualiser" 
+                                class="btn-secondary"/>
+                        <button name="action_apply_theme" 
+                                type="object" 
+                                string="Appliquer" 
+                                class="btn-primary"/>
+                        <button special="cancel" string="Annuler" class="btn-link"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Action pour ouvrir le wizard -->
+        <record id="action_open_theme_config_wizard" model="ir.actions.act_window">
+            <field name="name">Configurer le thème</field>
+            <field name="res_model">tp.theme.config.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'form_view_ref': 'view_theme_config_wizard_form'}</field>
+        </record>
+        
+        <!-- Menu pour le wizard -->
+        <menuitem id="menu_tp_theme_config" 
+                  name="Configurer le thème" 
+                  parent="menu_tp_notes"
+                  action="action_open_theme_config_wizard"
+                  sequence="90"/>
+                  
+    </data>
+</odoo>
+
